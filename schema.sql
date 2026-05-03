@@ -32,6 +32,7 @@ CREATE TABLE rides (
   ride_date DATE NOT NULL,
   ride_time TIME NOT NULL,
   seats_available INT CHECK (seats_available BETWEEN 1 AND 6),
+  price DECIMAL(6,2) DEFAULT 0.00,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (driver_id) REFERENCES users(id)
 );
