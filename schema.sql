@@ -1,75 +1,60 @@
-DROP TABLE IF EXISTS messages;
-DROP TABLE IF EXISTS ride_bookings;
-DROP TABLE IF EXISTS rides;
-DROP TABLE IF EXISTS driver_details;
-DROP TABLE IF EXISTS users;
+CREATE DATABASE IF NOT EXISTS carpool;
+USE carpool;
 
-CREATE TABLE `driver_details` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `car_make_model` varchar(100) DEFAULT NULL,
-  `car_registration` varchar(20) DEFAULT NULL,
-  `car_colour` varchar(50) DEFAULT NULL,
-  `seats_available` int DEFAULT '3',
-  `verified` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `driver_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `messages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sender_id` int NOT NULL,
-  `receiver_id` int NOT NULL,
-  `ride_id` int DEFAULT NULL,
-  `message` text,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `sender_id` (`sender_id`),
-  KEY `receiver_id` (`receiver_id`),
-  KEY `ride_id` (`ride_id`),
-  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`ride_id`) REFERENCES `rides` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `ride_bookings` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ride_id` int NOT NULL,
-  `passenger_id` int NOT NULL,
-  `seats_booked` int DEFAULT NULL,
-  `status` enum('pending','confirmed','cancelled') DEFAULT 'pending',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `ride_id` (`ride_id`),
-  KEY `passenger_id` (`passenger_id`),
-  CONSTRAINT `ride_bookings_ibfk_1` FOREIGN KEY (`ride_id`) REFERENCES `rides` (`id`),
-  CONSTRAINT `ride_bookings_ibfk_2` FOREIGN KEY (`passenger_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `rides` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `driver_id` int NOT NULL,
-  `pickup_location` varchar(255) DEFAULT NULL,
-  `dropoff_location` varchar(255) DEFAULT NULL,
-  `departure_time` datetime DEFAULT NULL,
-  `available_seats` int DEFAULT NULL,
-  `price` decimal(6,2) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `driver_id` (`driver_id`),
-  CONSTRAINT `rides_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `student_id` varchar(20) NOT NULL,
-  `faculty` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `role` enum('passenger','driver') NOT NULL,
-  `status` enum('pending','active','suspended') DEFAULT 'pending',
-  `email_verified` tinyint(1) DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  full_name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  student_id VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('student','driver') DEFAULT 'student',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE drivers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  faculty VARCHAR(100),
+  phone VARCHAR(30),
+  car_make_model VARCHAR(100),
+  car_registration VARCHAR(50),
+  car_colour VARCHAR(50),
+  seats_available INT CHECK (seats_available BETWEEN 1 AND 6),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE rides (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  driver_id INT NOT NULL,
+  pickup_location VARCHAR(100) NOT NULL,
+  dropoff_location VARCHAR(100) NOT NULL,
+  ride_date DATE NOT NULL,
+  ride_time TIME NOT NULL,
+  seats_available INT CHECK (seats_available BETWEEN 1 AND 6),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (driver_id) REFERENCES users(id)
+);
+
+CREATE TABLE ride_bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ride_id INT NOT NULL,
+  passenger_id INT NOT NULL,
+  seats_booked INT DEFAULT 1,
+  status ENUM('pending','confirmed','cancelled') DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (ride_id) REFERENCES rides(id),
+  FOREIGN KEY (passenger_id) REFERENCES users(id)
+);
+
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
+  ride_id INT,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (sender_id) REFERENCES users(id),
+  FOREIGN KEY (receiver_id) REFERENCES users(id),
+  FOREIGN KEY (ride_id) REFERENCES rides(id)
+);
