@@ -4,11 +4,13 @@ USE carpool;
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   full_name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  student_id VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  student_id VARCHAR(50) UNIQUE,
   password VARCHAR(255) NOT NULL,
-  role ENUM('student','driver') DEFAULT 'student',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  role ENUM('passenger','driver') DEFAULT 'passenger',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  verification_token VARCHAR(64) DEFAULT NULL,
+  is_verified TINYINT(1) DEFAULT 0
 );
 
 CREATE TABLE drivers (
