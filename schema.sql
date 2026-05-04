@@ -22,6 +22,7 @@ CREATE TABLE drivers (
   car_registration VARCHAR(50),
   car_colour VARCHAR(50),
   seats_available INT CHECK (seats_available BETWEEN 1 AND 6),
+  drivers_licence_image VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
