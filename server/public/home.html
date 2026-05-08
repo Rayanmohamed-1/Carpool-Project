@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardiff Met Carpool - Home</title>
+    <style>
+      /* reset some basic stuff */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0b3c5d, #092c45);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* top navigation bar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 40px;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      /* yellow logo box */
+      .logo-box {
+        width: 38px;
+        height: 38px;
+        background: #f2c94c;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+
+      .login-btn {
+        background: #f2c94c;
+        color: #0b3c5d;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .login-btn:hover {
+        background: #e0b83c;
+      }
+
+      /* main hero section at top of page */
+      .hero {
+        text-align: center;
+        padding: 80px 40px 60px;
+        color: white;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        color: white;
+      }
+
+      /* make campus word yellow */
+      .hero h1 span {
+        color: #f2c94c;
+      }
+
+      .hero p {
+        font-size: 16px;
+        opacity: 0.85;
+        max-width: 540px;
+        margin: 0 auto 40px;
+        line-height: 1.6;
+      }
+
+      /* buttons side by side */
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-yellow {
+        background: #f2c94c;
+        color: #0b3c5d;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-yellow:hover {
+        background: #e0b83c;
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: white;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-outline:hover {
+        border-color: white;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* white section explaining why use the app */
+      .why-section {
+        background: white;
+        padding: 60px 40px;
+        text-align: center;
+      }
+
+      .why-section h2 {
+        color: #0b3c5d;
+        font-size: 28px;
+        margin-bottom: 40px;
+        font-weight: bold;
+      }
+
+      /* 4 cards in a row */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .info-card {
+        background: #f2c94c;
+        border-radius: 12px;
+        padding: 24px;
+        text-align: left;
+      }
+
+      /* dark blue icon box inside each card */
+      .card-icon {
+        width: 46px;
+        height: 46px;
+        background: #0b3c5d;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 14px;
+      }
+
+      .info-card h4 {
+        color: #0b3c5d;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .info-card p {
+        color: #333;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      /* yellow call to action section */
+      .cta-section {
+        background: #f2c94c;
+        padding: 60px 40px;
+        text-align: center;
+      }
+
+      .cta-section h2 {
+        color: #0b3c5d;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .cta-section p {
+        color: #0b3c5d;
+        font-size: 15px;
+        margin-bottom: 24px;
+        opacity: 0.8;
+      }
+
+      .btn-dark {
+        background: #0b3c5d;
+        color: white;
+        padding: 14px 36px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-dark:hover {
+        background: #092c45;
+      }
+
+      /* footer at bottom */
+      .footer {
+        background: #061e2f;
+        color: white;
+        text-align: center;
+        padding: 18px;
+        font-size: 13px;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar at top -->
+    <nav class="navbar">
+      <a href="home.html" class="navbar-brand">
+        <div class="logo-box">🚗</div>
+        Cardiff Met Carpool
+      </a>
+      <a href="index.html" class="login-btn">Login</a>
+    </nav>
+
+    <!-- hero banner -->
+    <div class="hero">
+      <h1>Share Your Journey to <span>Campus</span></h1>
+      <p>
+        Connect with verified Cardiff Met students for reliable, affordable and
+        organised carpooling to and from campus.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="register-passenger.html" class="btn-yellow">
+          👤 Register as Passenger
+        </a>
+        <a href="driverregister.php" class="btn-outline">
+          🚗 Register as Driver
+        </a>
+      </div>
+    </div>
+
+    <!-- info cards section -->
+    <div class="why-section">
+      <h2>Why Choose Cardiff Met Carpool?</h2>
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-icon">🔒</div>
+          <h4>Verified Students Only</h4>
+          <p>
+            Only Cardiff Met students can join so you know everyone on the
+            platform is verified.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">📍</div>
+          <h4>Real-Time Ride Matching</h4>
+          <p>
+            Search for rides by date and location and find a match that fits
+            your schedule.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">💬</div>
+          <h4>Direct Communication</h4>
+          <p>
+            Message drivers and passengers directly through the app to sort out
+            pickup details.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">💰</div>
+          <h4>Save on Travel Costs</h4>
+          <p>
+            Split fuel costs with other students and save money getting to and
+            from campus.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- get started section -->
+    <div class="cta-section">
+      <h2>Ready to Start Carpooling?</h2>
+      <p>
+        Join other Cardiff Met students who are already saving money and
+        reducing their carbon footprint.
+      </p>
+      <a href="register-passenger.html" class="btn-dark">Get Started Today</a>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+      &copy; 2026 Cardiff Met Carpool &mdash; For Cardiff Metropolitan
+      University students only.
+    </div>
+  </body>
+</html>

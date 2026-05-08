@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardiff Met Carpool - Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* dark blue background for the whole page */
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0b3c5d, #092c45);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+      }
+
+      /* logo and app name at top */
+      .logo-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        color: white;
+        font-size: 21px;
+        font-weight: bold;
+      }
+
+      /* yellow box with car emoji */
+      .logo-box {
+        width: 44px;
+        height: 44px;
+        background: #f2c94c;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      /* white login card in the middle */
+      .card {
+        background: white;
+        padding: 36px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 440px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* coloured line at top of card */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #0b3c5d, #f2c94c);
+      }
+
+      /* yellow icon inside card */
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        background: #f2c94c;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 14px;
+      }
+
+      h2 {
+        color: #0b3c5d;
+        font-size: 24px;
+        margin-bottom: 24px;
+        font-weight: bold;
+      }
+
+      /* spacing between each input field */
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        color: #123f5f;
+        margin-bottom: 6px;
+      }
+
+      /* wrapper so we can put icon inside input */
+      .input-wrapper {
+        position: relative;
+      }
+
+      /* small icon on left side of input */
+      .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: #aaa;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px 14px 12px 40px;
+        border: 1px solid #d7e0e8;
+        border-radius: 10px;
+        font-size: 14px;
+        background: #fbfdff;
+        color: #0b3c5d;
+        outline: none;
+      }
+
+      /* highlight border when user clicks on input */
+      input:focus {
+        border-color: #0b3c5d;
+        box-shadow: 0 0 0 3px rgba(11, 60, 93, 0.1);
+      }
+
+      /* main submit button */
+      .btn-primary {
+        width: 100%;
+        padding: 13px;
+        background: #0b3c5d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .btn-primary:hover {
+        background: #092c45;
+      }
+
+      /* red error box shown when login fails */
+      .error {
+        background: #fce4d6;
+        color: #843c0c;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border: 1px solid #f0a07a;
+      }
+
+      /* green box shown when login works */
+      .success {
+        background: #e2efda;
+        color: #375623;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border: 1px solid #a9d18e;
+      }
+
+      /* used to hide elements */
+      .hidden {
+        display: none;
+      }
+
+      /* link at bottom of card */
+      .link-text {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+        margin-top: 18px;
+      }
+
+      .link-text a {
+        color: #0b3c5d;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .link-text a:hover {
+        text-decoration: underline;
+      }
+
+      /* back to home link below card */
+      .back-link {
+        color: white;
+        text-decoration: none;
+        font-size: 13px;
+        margin-top: 18px;
+        opacity: 0.7;
+      }
+
+      .back-link:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- app logo and name -->
+    <div class="logo-header">
+      <div class="logo-box">🚗</div>
+      Cardiff Met Carpool
+    </div>
+
+    <!-- login form card -->
+    <div class="card">
+      <div class="card-icon">🔐</div>
+      <h2>Welcome Back</h2>
+
+      <!-- these show up if there is an error or success -->
+      <div id="error-message" class="error hidden"></div>
+      <div id="success-message" class="success hidden"></div>
+
+      <form id="login-form">
+        <!-- email input -->
+        <div class="form-group">
+          <label for="email">Cardiff Met Email</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input
+              type="email"
+              id="email"
+              placeholder="student@cardiffmet.ac.uk"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- password input -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Log In</button>
+      </form>
+
+      <p class="link-text">
+        Don't have an account?
+        <a href="register-passenger.html">Create account</a>
+      </p>
+    </div>
+
+    <a href="home.html" class="back-link">← Back to home</a>
+
+    <script>
+      // wait for the form to be submitted
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // get what the user typed in
+          var email = document.getElementById("email").value;
+          var password = document.getElementById("password").value;
+
+          // get the message boxes
+          var errorBox = document.getElementById("error-message");
+          var successBox = document.getElementById("success-message");
+
+          // hide any old messages first
+          errorBox.classList.add("hidden");
+          successBox.classList.add("hidden");
+
+          // check its a cardiff met email before sending to server
+          if (
+            !email.endsWith("@cardiffmet.ac.uk") &&
+            !email.endsWith("@outlook.uwicac.ac.uk")
+          ) {
+            errorBox.textContent = "You must use a Cardiff Met email address.";
+            errorBox.classList.remove("hidden");
+            return;
+          }
+
+          // send login details to the php file
+          try {
+            var response = await fetch("login.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: email, password: password }),
+            });
+
+            var data = await response.json();
+
+            if (response.ok) {
+              // login worked so show success and redirect
+              successBox.textContent = "Login successful! Redirecting...";
+              successBox.classList.remove("hidden");
+
+              // send driver to driver page and passenger to passenger page
+
+              if (data.role === "driver") {
+                window.location.href = "Driverdashboard.php";
+              } else {
+                window.location.href = "passengerDashboard.php";
+              }
+            } else {
+              // login failed so show the error from the server
+              errorBox.textContent = data.error;
+              errorBox.classList.remove("hidden");
+            }
+          } catch (err) {
+            // something went wrong connecting to server
+            errorBox.textContent =
+              "Unable to connect to server. Please try again.";
+            errorBox.classList.remove("hidden");
+          }
+        });
+    </script>
+  </body>
+</html>
