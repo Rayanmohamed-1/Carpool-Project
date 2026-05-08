@@ -1,0 +1,17 @@
+{
+    "name": "cardiff-met/carpool-app",
+    "description": "Carpooling App for Cardiff Students - SEN5002 Assessment",
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Carpool\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Carpool\\Tests\\": "tests/"
+        }
+    }
+}
