@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav {
+    width: 100%;
+    padding: 15px 30px;
+    margin-bottom: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    font-weight: 700;
+    background: #0b3c5d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.nav a:hover {
+    opacity: 0.85;
+}
+body.Create-A-Ride {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff);
+    min-height: 100vh;
+    padding: 45px 25px;
+    color: #0b3c5d;
+}
+.page-center {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+}
+.card {
+    background: #ffffff;
+    padding: 42px;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(11, 60, 93, 0.16);
+    border: 1px solid rgba(11, 60, 93, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background: linear-gradient(90deg, #0b3c5d, #f2c94c);
+}
+h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #0b3c5d;
+    margin-bottom: 8px;
+}
+h3 {
+    text-align: center;
+    color: #5b7486;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 32px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 7px;
+    color: #123f5f;
+    font-weight: 700;
+    font-size: 14px;
+}
+input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d7e0e8;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fbfdff;
+    margin-bottom: 18px;
+    transition: 0.2s ease;
+}
+input:hover {
+    border-color: #b8cad8;
+}
+input:focus {
+    outline: none;
+    border-color: #0b3c5d;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(11, 60, 93, 0.12);
+}
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+    color: #123f5f;
+}
+input[type="submit"] {
+    margin-top: 12px;
+    background: linear-gradient(135deg, #0b3c5d, #092c45);
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    padding: 15px;
+    border-radius: 10px;
+}
+input[type="submit"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(11, 60, 93, 0.25);
+}
+input[type="submit"]:active {
+    transform: translateY(0);
+}
+.message {
+    background: #eef6ff;
+    color: #0b3c5d;
+    border-left: 5px solid #0b3c5d;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(11, 60, 93, 0.08);
+}
+.message.success {
+    background: #eefbf3;
+    border-left-color: #1f8f4d;
+    color: #1f8f4d;
+}
+
+.message.error {
+    background: #fff3f3;
+    border-left-color: #d64545;
+    color: #b42323;
+}
+
+.autocomplete-wrapper {
+
+    position: relative;
+
+    width: 100%;
+}
+
+.autocomplete-results {
+
+    display: none;
+
+    position: absolute;
+
+    top: 52px;
+
+    left: 0;
+
+    right: 0;
+
+    background: white;
+
+    border: 1px solid #d7e0e8;
+
+    border-radius: 10px;
+
+    box-shadow: 0 10px 25px rgba(11, 60, 93, 0.18);
+
+    z-index: 999;
+
+    overflow: hidden;
+}
+
+.autocomplete-item {
+
+    padding: 12px 14px;
+
+    font-size: 14px;
+
+    color: #123f5f;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #edf2f6;
+
+    background: white;
+}
+
+.autocomplete-item:last-child {
+
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+
+    background: #eef6ff;
+}
+@media (max-width: 800px) {
+    body.Create-A-Ride {
+        padding: 30px 15px;
+    }
+    .card {
+        padding: 30px 22px;
+    }
+    h2 {
+        font-size: 25px;
+    }
+    h3 {
+        font-size: 15px;
+    }
+}

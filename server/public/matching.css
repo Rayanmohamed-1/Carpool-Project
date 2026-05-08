@@ -1,0 +1,249 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body.driver-dashboard{
+    font-family:"Segoe UI", Arial, sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef6ff,#f8fbff);
+    color:#0b3c5d;
+}
+
+.Header{
+    width:100%;
+    padding:22px 45px;
+    background:#ffffff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 8px 25px rgba(11,60,93,0.12);
+    border-bottom:1px solid rgba(11,60,93,0.08);
+}
+
+.brand{
+    font-size:28px;
+    font-weight:800;
+    color:#0b3c5d;
+}
+
+.nav{
+    display:flex;
+    gap:18px;
+}
+
+.nav a{
+    text-decoration:none;
+    font-weight:700;
+    padding:10px 16px;
+    border-radius:10px;
+    transition:0.2s ease;
+}
+
+.nav a:first-child{
+    background:linear-gradient(135deg,#f2c94c,#d9a900);
+    color:#0b3c5d;
+}
+
+.nav a:first-child:hover{
+    filter:brightness(1.05);
+}
+
+.nav .logout{
+    background:#0b3c5d;
+    color:#ffffff;
+}
+
+.nav .logout:hover{
+    background:#092c45;
+}
+
+.page-center{
+    max-width:1500px;
+    margin:0 auto;
+    padding:60px 25px;
+}
+
+.card{
+    background:#ffffff;
+    border-radius:20px;
+    padding:45px;
+    box-shadow:0 18px 45px rgba(11,60,93,0.16);
+    border:1px solid rgba(11,60,93,0.08);
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:linear-gradient(90deg,#0b3c5d,#f2c94c);
+}
+
+.DD{
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:14px;
+    font-weight:800;
+    color:#f2c94c;
+    margin-bottom:12px;
+}
+
+.welcome{
+    text-align:center;
+    font-size:34px;
+    color:#0b3c5d;
+    margin-bottom:14px;
+}
+
+.dashboard-text{
+    max-width:750px;
+    margin:0 auto 35px;
+    text-align:center;
+    color:#123f5f;
+    font-size:17px;
+    line-height:1.6;
+}
+
+.message{
+    max-width:650px;
+    margin:0 auto 25px;
+    padding:16px 20px;
+    border-radius:14px;
+    background:#f8fbff;
+    color:#0b3c5d;
+    font-weight:700;
+    text-align:center;
+    border:1px solid rgba(11,60,93,0.12);
+    box-shadow:0 8px 20px rgba(11,60,93,0.08);
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    border-radius:16px;
+}
+
+.matches-table{
+    width:100%;
+    min-width:1300px;
+    border-collapse:collapse;
+    background:#ffffff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(11,60,93,0.08);
+}
+
+.matches-table thead{
+    background:linear-gradient(135deg,#0b3c5d,#092c45);
+}
+
+.matches-table th{
+    color:#ffffff;
+    padding:18px 15px;
+    text-align:left;
+    font-size:14px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.matches-table td{
+    padding:17px 15px;
+    color:#123f5f;
+    font-size:14px;
+    border-bottom:1px solid rgba(11,60,93,0.08);
+    vertical-align:top;
+}
+
+.matches-table tbody tr{
+    transition:0.2s ease;
+}
+
+.matches-table tbody tr:hover{
+    background:#f7fbff;
+}
+
+.matches-table tbody tr:hover td{
+    background:#f7fbff;
+}
+
+.matches-table td:first-child{
+    font-weight:800;
+    color:#0b3c5d;
+}
+
+.matches-table td:nth-child(8){
+    font-weight:800;
+    color:#0b3c5d;
+}
+
+.matches-table tr:last-child td{
+    border-bottom:none;
+}
+
+.matches-table small{
+    display:inline-block;
+    margin-top:5px;
+    color:#123f5f;
+    opacity:0.75;
+    font-weight:600;
+}
+
+.small-btn{
+    border:none;
+    outline:none;
+    cursor:pointer;
+    padding:10px 14px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#f2c94c,#d9a900);
+    color:#0b3c5d;
+    font-weight:800;
+    font-size:14px;
+    white-space:nowrap;
+    transition:0.2s ease;
+}
+
+.small-btn:hover{
+    filter:brightness(1.05);
+    transform:translateY(-1px);
+}
+
+.small-btn:active{
+    transform:translateY(0);
+}
+
+@media(max-width:900px){
+    .Header{
+        flex-direction:column;
+        gap:15px;
+        padding:22px;
+    }
+
+    .nav{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .page-center{
+        padding:35px 16px;
+    }
+
+    .card{
+        padding:35px 22px;
+    }
+
+    .welcome{
+        font-size:26px;
+    }
+
+    .dashboard-text{
+        font-size:15px;
+    }
+}

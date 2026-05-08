@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.Create-A-Ride {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff);
+    min-height: 100vh;
+    padding: 45px 25px;
+    color: #0b3c5d;
+}
+
+.nav {
+    width: 100%;
+    padding: 15px 30px;
+    margin-bottom: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    font-weight: 700;
+    background: #0b3c5d;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: 0.2s ease;
+}
+
+.nav a:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.page-center {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.message {
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 18px 24px;
+    background: #fff6d8;
+    color: #7a5a00;
+    border-left: 6px solid #f2c94c;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+}
+
+.Card,
+.Upcoming-Rides-display {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 22px;
+    border: 1px solid rgba(11, 60, 93, 0.08);
+    box-shadow: 0 18px 45px rgba(11, 60, 93, 0.12);
+    position: relative;
+    margin-bottom: 38px;
+}
+
+.Card::before,
+.Upcoming-Rides-display::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 7px;
+    width: 100%;
+    background: linear-gradient(90deg, #0b3c5d, #f2c94c);
+    border-radius: 22px 22px 0 0;
+}
+
+.Card {
+    overflow: visible;
+}
+
+.Upcoming-Rides-display {
+    overflow-x: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    color: #0b3c5d;
+    margin-bottom: 8px;
+}
+
+h2 {
+    text-align: center;
+    color: #5f7687;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #123f5f;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #d7e0e8;
+    border-radius: 12px;
+    font-size: 15px;
+    background: #fbfdff;
+    transition: 0.2s ease;
+    color: #0b3c5d;
+    appearance: none;
+}
+
+input:hover {
+    border-color: #b6cad8;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0b3c5d;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(11, 60, 93, 0.12);
+}
+
+input[type="submit"] {
+    margin-top: 15px;
+    border: none;
+    background: linear-gradient(135deg, #0b3c5d, #08273d);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 16px;
+    letter-spacing: 0.3px;
+    transition: 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(11, 60, 93, 0.22);
+}
+
+.rUpcoming-Rides-display-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 950px;
+}
+
+.rUpcoming-Rides-display-table thead {
+    background: #0b3c5d;
+    color: white;
+}
+
+.rUpcoming-Rides-display-table th,
+.rUpcoming-Rides-display-table td {
+    padding: 18px 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #e4edf5;
+}
+
+.rUpcoming-Rides-display-table tbody tr:hover {
+    background: #f4f9fd;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #0b3c5d;
+    color: white;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 6px;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(11, 60, 93, 0.2);
+}
+
+.delete-btn {
+    background: #c62828;
+}
+
+.delete-btn:hover {
+    box-shadow: 0 5px 12px rgba(198, 40, 40, 0.22);
+}
+
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-results {
+    display: none;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #d7e0e8;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(11, 60, 93, 0.16);
+    z-index: 9999;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.autocomplete-results.show {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #0b3c5d;
+    cursor: pointer;
+    border-bottom: 1px solid #edf2f6;
+    transition: 0.15s ease;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background: #eef6ff;
+}
+
+@media (max-width: 800px) {
+
+    body.Create-A-Ride {
+        padding: 30px 15px;
+    }
+
+    .Card,
+    .Upcoming-Rides-display {
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 15px;
+    }
+
+    .rUpcoming-Rides-display-table {
+        min-width: 750px;
+    }
+}
