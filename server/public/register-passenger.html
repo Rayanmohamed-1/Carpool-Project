@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardiff Met Carpool - Register as Passenger</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* dark blue background same as login page */
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0b3c5d, #092c45);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+      }
+
+      /* top logo area */
+      .logo-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        color: white;
+        font-size: 21px;
+        font-weight: bold;
+      }
+
+      .logo-box {
+        width: 44px;
+        height: 44px;
+        background: #f2c94c;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      /* main white card */
+      .card {
+        background: white;
+        padding: 36px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 480px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* blue to yellow line at top of card */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #0b3c5d, #f2c94c);
+      }
+
+      /* yellow icon at top of form */
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        background: #f2c94c;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 14px;
+      }
+
+      h2 {
+        color: #0b3c5d;
+        font-size: 24px;
+        margin-bottom: 22px;
+        font-weight: bold;
+      }
+
+      /* gap between each field */
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        color: #123f5f;
+        margin-bottom: 5px;
+      }
+
+      /* needed so we can put emoji icon inside input box */
+      .input-wrapper {
+        position: relative;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: #aaa;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px 14px 12px 40px;
+        border: 1px solid #d7e0e8;
+        border-radius: 10px;
+        font-size: 14px;
+        background: #fbfdff;
+        color: #0b3c5d;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #0b3c5d;
+        box-shadow: 0 0 0 3px rgba(11, 60, 93, 0.1);
+      }
+
+      /* blue info box telling user about email verification */
+      .notice-box {
+        background: #eef6ff;
+        border: 1px solid #bee3f8;
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 13px;
+        color: #0b3c5d;
+        margin-top: 14px;
+      }
+
+      /* submit button */
+      .btn-primary {
+        width: 100%;
+        padding: 13px;
+        background: #0b3c5d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .btn-primary:hover {
+        background: #092c45;
+      }
+
+      /* red box for errors */
+      .error {
+        background: #fce4d6;
+        color: #843c0c;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border: 1px solid #f0a07a;
+      }
+
+      /* green box for success */
+      .success {
+        background: #e2efda;
+        color: #375623;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border: 1px solid #a9d18e;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* already have account link */
+      .link-text {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+        margin-top: 18px;
+      }
+
+      .link-text a {
+        color: #0b3c5d;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .link-text a:hover {
+        text-decoration: underline;
+      }
+
+      /* back link below the card */
+      .back-link {
+        color: white;
+        text-decoration: none;
+        font-size: 13px;
+        margin-top: 18px;
+        opacity: 0.7;
+      }
+
+      .back-link:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- logo at top -->
+    <div class="logo-header">
+      <div class="logo-box">👤</div>
+      Cardiff Met Carpool
+    </div>
+
+    <!-- registration card -->
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <h2>Register as Passenger</h2>
+
+      <!-- error and success messages -->
+      <div id="error-message" class="error hidden"></div>
+      <div id="success-message" class="success hidden"></div>
+
+      <form id="register-form">
+        <!-- full name -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- cardiff met email only -->
+        <div class="form-group">
+          <label for="email">Cardiff Met Email</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input
+              type="email"
+              id="email"
+              placeholder="student@cardiffmet.ac.uk"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- student id number -->
+        <div class="form-group">
+          <label for="student-id">Student ID</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🎓</span>
+            <input
+              type="text"
+              id="student-id"
+              placeholder="e.g. ST20051234"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- faculty - helps confirm they are a student not staff -->
+        <div class="form-group">
+          <label for="faculty">Faculty</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🏫</span>
+            <input
+              type="text"
+              id="faculty"
+              placeholder="e.g. School of Technologies"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- phone number for contact -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📱</span>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="e.g. 07123456789"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- password field -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- confirm password to make sure they match -->
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- info message about email verification -->
+        <div class="notice-box">
+          ✅ Your Cardiff Met email will be verified before you can book rides
+        </div>
+
+        <button type="submit" class="btn-primary">
+          Create Passenger Account
+        </button>
+      </form>
+
+      <p class="link-text">
+        Already have an account? <a href="index.html">Log in</a>
+      </p>
+    </div>
+
+    <a href="home.html" class="back-link">← Back to home</a>
+
+    <script>
+      // run this when the form is submitted
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // grab all the values from the form
+          var name = document.getElementById("name").value;
+          var email = document.getElementById("email").value;
+          var studentId = document.getElementById("student-id").value;
+          var faculty = document.getElementById("faculty").value;
+          var phone = document.getElementById("phone").value;
+          var password = document.getElementById("password").value;
+          var confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          var errorBox = document.getElementById("error-message");
+          var successBox = document.getElementById("success-message");
+
+          // clear old messages
+          errorBox.classList.add("hidden");
+          successBox.classList.add("hidden");
+
+          // make sure its a cardiff met email
+          if (
+            !email.endsWith("@cardiffmet.ac.uk") &&
+            !email.endsWith("@outlook.uwicac.ac.uk")
+          ) {
+            errorBox.textContent = "You must use a Cardiff Met email address.";
+            errorBox.classList.remove("hidden");
+            return;
+          }
+
+          // password needs to be at least 8 characters
+          if (password.length < 8) {
+            errorBox.textContent = "Password must be at least 8 characters.";
+            errorBox.classList.remove("hidden");
+            return;
+          }
+
+          // check both passwords are the same
+          if (password !== confirmPassword) {
+            errorBox.textContent = "Passwords do not match.";
+            errorBox.classList.remove("hidden");
+            return;
+          }
+
+          // send the data to register.php
+          try {
+            var response = await fetch("register.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                student_id: studentId,
+                faculty: faculty,
+                phone: phone,
+                password: password,
+                role: "passenger",
+              }),
+            });
+
+            var data = await response.json();
+
+            if (response.ok) {
+              // show verify link same as rayan does for drivers
+              successBox.innerHTML =
+                'Account created! Please verify your email before logging in.<br><br><a href="' +
+                data.verify_link +
+                '" style="color:#0b3c5d;font-weight:bold;">Click here to verify your email</a>';
+              successBox.classList.remove("hidden");
+            } else {
+              // something went wrong so show the error
+              errorBox.textContent = data.error;
+              errorBox.classList.remove("hidden");
+            }
+          } catch (err) {
+            // server connection issue
+            errorBox.textContent =
+              "Unable to connect to server. Please try again.";
+            errorBox.classList.remove("hidden");
+          }
+        });
+    </script>
+  </body>
+</html>
