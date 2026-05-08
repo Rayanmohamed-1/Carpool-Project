@@ -1,3 +1,4 @@
 <?php
-echo "Carpool (docker) environment is working";
+header("Location: home.html");
+exit;
 ?>
